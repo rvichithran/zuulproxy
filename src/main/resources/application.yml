@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: zuulproxy
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+zuul:
+  sensitive-headers: Cookie, Set-Cookie

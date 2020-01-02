@@ -12,18 +12,16 @@ public class FilterUtils {
 
     public String getCorrelationId() {
         RequestContext ctx = RequestContext.getCurrentContext();
+        System.out.println(ctx.getRequest().getHeader("Authorization"));
         if(ctx.getRequest().getHeader(UserContext.CORRELATION_ID) != null) {
-            System.out.println("Request header [Correlation Id] : "+ctx.getRequest().getHeader(UserContext.CORRELATION_ID));
             return ctx.getRequest().getHeader(UserContext.CORRELATION_ID);
         } else {
-            System.out.println("Zuul request header [Correlation Id] : "+ctx.getZuulRequestHeaders().get(UserContext.CORRELATION_ID));
             return ctx.getZuulRequestHeaders().get(UserContext.CORRELATION_ID);
         }
     }
 
     public void setCorrelationId(final String correlationId) {
         RequestContext ctx = RequestContext.getCurrentContext();
-        System.out.println(" Setting correlation id : "+correlationId);
         ctx.addZuulRequestHeader(UserContext.CORRELATION_ID, correlationId);
     }
 

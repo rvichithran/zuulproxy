@@ -35,7 +35,6 @@ public class TrackingFilter extends ZuulFilter {
         if(filterUtils.getCorrelationId() == null) {
             filterUtils.setCorrelationId(generateCorrelationId());
         }
-
         return null;
     }
 

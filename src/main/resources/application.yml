@@ -1,6 +1,8 @@
 spring:
   application:
     name: zuulproxy
+  zipkin:
+    baseUrl: http://localhost:9411/
 management:
   endpoints:
     web:

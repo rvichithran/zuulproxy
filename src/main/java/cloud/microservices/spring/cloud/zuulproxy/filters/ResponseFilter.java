@@ -1,5 +1,6 @@
 package cloud.microservices.spring.cloud.zuulproxy.filters;
 
+import brave.Tracer;
 import cloud.microservices.spring.cloud.zuulproxy.utils.UserContext;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -16,6 +17,8 @@ public class ResponseFilter extends ZuulFilter {
     @Autowired
     private FilterUtils filterUtils;
 
+    @Autowired
+    private Tracer tracer;
 
     @Override
     public String filterType() {
@@ -35,7 +38,8 @@ public class ResponseFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
-        ctx.getResponse().addHeader(UserContext.CORRELATION_ID, filterUtils.getCorrelationId());
+        //ctx.getResponse().addHeader(UserContext.CORRELATION_ID, filterUtils.getCorrelationId());
+        ctx.getResponse().addHeader(UserContext.CORRELATION_ID, tracer.currentSpan().context().traceIdString());
         return null;
 
     }

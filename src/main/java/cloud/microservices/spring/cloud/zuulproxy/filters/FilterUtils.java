@@ -12,7 +12,6 @@ public class FilterUtils {
 
     public String getCorrelationId() {
         RequestContext ctx = RequestContext.getCurrentContext();
-        System.out.println(ctx.getRequest().getHeader("Authorization"));
         if(ctx.getRequest().getHeader(UserContext.CORRELATION_ID) != null) {
             return ctx.getRequest().getHeader(UserContext.CORRELATION_ID);
         } else {
